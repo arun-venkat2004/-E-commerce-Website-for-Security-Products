@@ -1,0 +1,84 @@
+<!-- This document will include all 7 project templates for RT CAM Private Limited -->
+
+<!-- Project 1: Smart Surveillance Dashboard -->
+<!-- Already added -->
+
+<!-- Project 2: E-commerce Website for Security Products -->
+<!-- Already added -->
+
+<!-- Project 3: AI Camera Detection Simulation -->
+<!-- Already added -->
+
+<!-- Project 4: Camera Installation Tracker -->
+<!-- START -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Camera Installation Tracker</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 90vh;
+      width: 100%;
+    }
+    .search-box {
+      padding: 10px;
+      background: #f4f4f4;
+      text-align: center;
+    }
+    input[type="text"] {
+      padding: 8px;
+      width: 300px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search location..." oninput="filterMarkers()" />
+  </div>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([20.5937, 78.9629], 5);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    const installations = [
+      { location: 'Chennai', lat: 13.0827, lng: 80.2707, details: 'Mall CCTV setup - 10 cameras' },
+      { location: 'Bangalore', lat: 12.9716, lng: 77.5946, details: 'Office building - 20 cameras' },
+      { location: 'Delhi', lat: 28.6139, lng: 77.2090, details: 'Public park coverage' },
+      { location: 'Mumbai', lat: 19.0760, lng: 72.8777, details: 'Bank ATM installation' },
+    ];
+
+    const markers = [];
+
+    installations.forEach(site => {
+      const marker = L.marker([site.lat, site.lng])
+        .addTo(map)
+        .bindPopup(`<b>${site.location}</b><br>${site.details}`);
+      marker.locationName = site.location.toLowerCase();
+      markers.push(marker);
+    });
+
+    function filterMarkers() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      markers.forEach(marker => {
+        if (marker.locationName.includes(query)) {
+          marker.addTo(map);
+        } else {
+          map.removeLayer(marker);
+        }
+      });
+    }
+  </script>
+</body>
+</html>
+<!-- END -->
+
+<!-- Project 5, 6, 7 coming next -->
